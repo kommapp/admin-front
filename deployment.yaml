@@ -1,0 +1,44 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: komm-admin
+  labels:
+    app: komm-admin
+spec:
+  type: ClusterIP
+  selector:
+    app: komm-admin
+  ports:
+    - name: komm-admin
+      protocol: TCP
+      port: 3000
+      targetPort: 3000
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: komm-admin
+  labels:
+    app: komm-admin
+  annotations:
+    kubernetes.digitalocean.com/load-balancer-id: "fra1-load-balancer-01"
+spec:
+  selector:
+    matchLabels:
+      app: komm-admin
+  strategy:
+    type: Recreate
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: komm-admin
+        tier: komm-admin
+    spec:
+      containers:
+        - name: komm-admin
+          image: registry.digitalocean.com/komm/komm-admin:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 3000
+              name: komm-admin

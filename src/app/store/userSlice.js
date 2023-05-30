@@ -84,9 +84,9 @@ export const updateUserData = (user) => async (dispatch, getState) => {
 const initialState = {
   role: [], // guest
   data: {
-    displayName: 'John Doe',
-    photoURL: 'assets/images/avatars/brian-hughes.jpg',
-    email: 'johndoe@withinpixels.com',
+    displayName: 'Default',
+    photoURL: 'https://s3.eu-central-1.wasabisys.com/komm-pro/profile/default.png',
+    email: 'default@komm.app',
     shortcuts: ['apps.calendar', 'apps.mailbox', 'apps.contacts', 'apps.tasks'],
   },
 };

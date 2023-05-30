@@ -12,7 +12,7 @@ import store from './store';
 import AppContext from './AppContext';
 
 const withAppProviders = (Component) => (props) => {
-  const WrapperComponent = () => (
+  return () => (
     <AppContext.Provider
       value={{
         routes,
@@ -27,8 +27,6 @@ const withAppProviders = (Component) => (props) => {
       </LocalizationProvider>
     </AppContext.Provider>
   );
-
-  return WrapperComponent;
 };
 
 export default withAppProviders;

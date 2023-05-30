@@ -21,6 +21,7 @@ function ProjectDashboardAppHeader(props) {
   });
 
   useEffect(() => {
+    console.log('list')
     dispatch(getProjects());
   }, [dispatch]);
 

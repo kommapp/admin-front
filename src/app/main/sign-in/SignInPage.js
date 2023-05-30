@@ -44,14 +44,15 @@ function SignInPage() {
   const { isValid, dirtyFields, errors } = formState;
 
   useEffect(() => {
-    setValue('email', 'admin@fusetheme.com', { shouldDirty: true, shouldValidate: true });
-    setValue('password', 'admin', { shouldDirty: true, shouldValidate: true });
+    setValue('email', 'adri@komm.app', { shouldDirty: true, shouldValidate: true });
+    setValue('password', '1234', { shouldDirty: true, shouldValidate: true });
   }, [setValue]);
 
   function onSubmit({ email, password }) {
     jwtService
       .signInWithEmailAndPassword(email, password)
       .then((user) => {
+        console.log(user);
         // No need to do anything, user data will be set at app/auth/AuthContext
       })
       .catch((_errors) => {
