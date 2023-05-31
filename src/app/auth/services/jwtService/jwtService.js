@@ -62,25 +62,16 @@ class JwtService extends FuseUtils.EventEmitter {
   };
 
   signInWithEmailAndPassword = (email, password) => {
-    console.log('ogo');
     return new Promise((resolve, reject) => {
       axios
-        .post(
-          jwtServiceConfig.signIn,
-          {
-            client_id: '74700eec6d3146ce8416de41da55f5a7',
-            client_secret: 'm++yGUNnvFWOHM35CpMSMbKFurfjYTkYyDKxPU0bI3w=',
-            username: email,
-            password,
-            scope: 'SUPER_USER',
-            grant_type: 'password',
-          },
-          {
-            headers: {
-              'Content-Type': 'application/json',
-            },
-          }
-        )
+        .post(jwtServiceConfig.signIn, {
+          client_id: '74700eec6d3146ce8416de41da55f5a7',
+          client_secret: 'm++yGUNnvFWOHM35CpMSMbKFurfjYTkYyDKxPU0bI3w=',
+          username: email,
+          password,
+          scope: 'SUPER_USER',
+          grant_type: 'password',
+        })
         .then(async (response) => {
           console.log(response);
           if (response.status === 200) {

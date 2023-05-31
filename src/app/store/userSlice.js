@@ -7,7 +7,7 @@ import { showMessage } from 'app/store/fuse/messageSlice';
 import settingsConfig from 'app/configs/settingsConfig';
 import jwtService from '../auth/services/jwtService';
 
-export const setUser = createAsyncThunk('user/setUser', async (user, { dispatch, getState }) => {
+export const setUser = createAsyncThunk('user/setUser', async (user) => {
   /*
     You can redirect the logged-in user to a specific route depending on his role
     */
@@ -65,7 +65,7 @@ export const logoutUser = () => async (dispatch, getState) => {
   return dispatch(userLoggedOut());
 };
 
-export const updateUserData = (user) => async (dispatch, getState) => {
+export const updateUserData = (user) => async (dispatch) => {
   if (!user.role || user.role.length === 0) {
     // is guest
     return;
@@ -82,7 +82,7 @@ export const updateUserData = (user) => async (dispatch, getState) => {
 };
 
 const initialState = {
-  role: [], // guest
+  role: ['admin'], // guest
   data: {
     displayName: 'Default',
     photoURL: 'https://s3.eu-central-1.wasabisys.com/komm-pro/profile/default.png',

@@ -20,9 +20,22 @@ import { AuthProvider } from './auth/AuthContext';
 /**
  * Axios HTTP Request defaults
  */
-axios.defaults.baseURL = 'http://localhost:8080';
-axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
-axios.defaults.headers.common['Content-Type'] = 'application/json';
+// axios.defaults.baseURL = 'http://localhost:8080';
+// axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
+// axios.defaults.headers.common['Content-Type'] = 'application/json';
+
+axios.interceptors.request.use((config) => {
+  console.log(config.url.match(/^admin\//gm));
+  // if (config.url.match(/^oauth\//gs) != null && config.url.match(/^oauth\//gs).length > 0) {
+  //   console.log('mock');
+  //   config.baseURL = 'http://localhost:8080';
+  // }
+  // if (config.url.match(/^admin\//gs) != null && config.url.match(/^admin\//gs).length > 0) {
+  //   console.log('mock');
+  //   config.baseURL = 'http://localhost:8080';
+  // }
+  return config;
+});
 
 const emotionCacheOptions = {
   rtl: {
