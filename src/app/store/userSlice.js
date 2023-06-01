@@ -8,9 +8,7 @@ import settingsConfig from 'app/configs/settingsConfig';
 import jwtService from '../auth/services/jwtService';
 
 export const setUser = createAsyncThunk('user/setUser', async (user) => {
-  /*
-    You can redirect the logged-in user to a specific route depending on his role
-    */
+  console.log(user);
   if (user.loginRedirectUrl) {
     settingsConfig.loginRedirectUrl = user.loginRedirectUrl; // for example 'apps/academy'
   }
@@ -65,7 +63,7 @@ export const logoutUser = () => async (dispatch, getState) => {
   return dispatch(userLoggedOut());
 };
 
-export const updateUserData = (user) => async (dispatch) => {
+export const updateUserData = (user) => async (dispatch, getState) => {
   if (!user.role || user.role.length === 0) {
     // is guest
     return;
@@ -82,7 +80,7 @@ export const updateUserData = (user) => async (dispatch) => {
 };
 
 const initialState = {
-  role: ['admin'], // guest
+  role: [], // guest
   data: {
     displayName: 'Default',
     photoURL: 'https://s3.eu-central-1.wasabisys.com/komm-pro/profile/default.png',

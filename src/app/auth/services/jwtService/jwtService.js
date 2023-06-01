@@ -77,8 +77,7 @@ class JwtService extends FuseUtils.EventEmitter {
           if (response.status === 200) {
             this.setSession(response.data.access_token);
             const user = await this.getUserInfo();
-            console.log(user);
-            resolve({
+            const data = {
               role: user.data.roles, // guest
               data: {
                 id: user.data.id,
@@ -87,11 +86,15 @@ class JwtService extends FuseUtils.EventEmitter {
                 email: user.data.email,
                 shortcuts: ['apps.calendar', 'apps.mailbox', 'apps.contacts', 'apps.tasks'],
               },
-            });
-            this.emit('onLogin', {});
+            };
+            resolve(data);
+            this.emit('onLogin', data);
           } else {
             reject(response.data.error);
           }
+        })
+        .catch((_error) => {
+          reject([].push({ type: 'error', message: _error.message }));
         });
     });
   };
