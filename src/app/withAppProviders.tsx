@@ -10,14 +10,15 @@ import { StyledEngineProvider } from '@mui/material/styles';
 import routes from 'app/configs/routesConfig';
 import store from './store';
 import AppContext from './AppContext';
+import { JSX } from 'react/jsx-runtime';
+import React from "react";
 
-const withAppProviders = (Component) => (props) => {
+const withAppProviders = (Component: React.ElementType) => (props: JSX.IntrinsicAttributes) => {
   return () => (
     <AppContext.Provider
       value={{
         routes,
-      }}
-    >
+      }}>
       <LocalizationProvider dateAdapter={AdapterDateFns}>
         <Provider store={store}>
           <StyledEngineProvider injectFirst>
